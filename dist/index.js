@@ -25,9 +25,16 @@ exports.default = function (babel) {
         var importDeclaration = babelPath.node.source.value;
         if (state && importDeclaration.startsWith(state.opts.importPrefix || '+')) {
           var rootSuffix = state.opts.rootSuffix || '';
+          var fallbackToAbsolute = state.opts.fallbackToAbsolute || true;
+
           var importedFile = _path2.default.join(_appRootPath2.default.path, rootSuffix, importDeclaration.substring(1, importDeclaration.length));
 
-          babelPath.node.source.value = '' + (0, _slash2.default)(_path2.default.normalize(importedFile));
+          var importer = _path2.default.isAbsolute(state.file.opts.filename) ? state.file.opts.filename : _path2.default.join(_appRootPath2.default.path, state.file.opts.filename);
+
+          var relativePath = _path2.default.relative(_path2.default.dirname(importer), importedFile);
+          var finalPath = fallbackToAbsolute === true && _appRootPath2.default.path !== process.cwd() ? importedFile : relativePath;
+
+          babelPath.node.source.value = (0, _slash2.default)(_path2.default.normalize(finalPath));
         }
       }
     }

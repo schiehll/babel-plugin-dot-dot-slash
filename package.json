@@ -2,9 +2,21 @@
   "name": "babel-plugin-dot-dot-slash",
   "version": "1.0.0",
   "description": "Babel plugin to solve the '../../../' problem.",
+  "author": "Reinaldo Schiehll <rn.schiehll@gmail.com> (http://github.com/schiehll)",
+  "license": "MIT",
   "main": "./dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schiehll/babel-plugin-dot-dot-slash.git"
+  },
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "import",
+    "relative import"
+  ],
   "scripts": {
-    "test": "ava",
+    "test": "ava --no-cache",
     "build": "babel ./index.js --out-dir ./dist"
   },
   "ava": {
@@ -16,8 +28,6 @@
     ],
     "babel": "inherit"
   },
-  "author": "Reinaldo Schiehll <rn.schiehll@gmail.com> (http://github.com/schiehll)",
-  "license": "MIT",
   "devDependencies": {
     "ava": "^0.13.0",
     "babel-cli": "^6.6.5",

@@ -1,23 +1,25 @@
+import appRoot from 'app-root-path'
 import test from 'ava'
 import slash from 'slash'
-import appRoot from 'app-root-path'
 import * as babel from 'babel-core'
 import DotDotSlash from '../index'
 
-test('Should transform the import declaration to an absolute path', t => {
-  let importDeclaration = `${appRoot.path}/path/to/module`
-  importDeclaration = `${slash(importDeclaration)}`
+process.chdir(appRoot.path)
+
+test('Should transform the import declaration to an relative path', t => {
+  let expected = 'path/to/module'
+  expected = slash(expected)
 
   const transformedCode = babel.transform("import Module from '+/path/to/module'", {
     plugins: [DotDotSlash]
   })
 
-  t.ok(transformedCode.code.includes(importDeclaration))
+  t.ok(transformedCode.code.includes(expected))
 })
 
 test('Should accept a rootSuffix config', t => {
-  let importDeclaration = `${appRoot.path}/app/path/to/module`
-  importDeclaration = `${slash(importDeclaration)}`
+  let expected = 'app/path/to/module'
+  expected = slash(expected)
 
   const transformedCode = babel.transform("import Module from '+/path/to/module'", {
     plugins: [
@@ -27,12 +29,12 @@ test('Should accept a rootSuffix config', t => {
     ]
   })
 
-  t.ok(transformedCode.code.includes(importDeclaration))
+  t.ok(transformedCode.code.includes(expected))
 })
 
 test('Should accept an importPrefix config', t => {
-  let importDeclaration = `${appRoot.path}/path/to/module`
-  importDeclaration = `${slash(importDeclaration)}`
+  let expected = 'path/to/module'
+  expected = slash(expected)
 
   const transformedCode = babel.transform("import Module from '/path/to/module'", {
     plugins: [
@@ -42,12 +44,12 @@ test('Should accept an importPrefix config', t => {
     ]
   })
 
-  t.ok(transformedCode.code.includes(importDeclaration))
+  t.ok(transformedCode.code.includes(expected))
 })
 
 test('Should accept both config options', t => {
-  let importDeclaration = `${appRoot.path}/src/path/to/module`
-  importDeclaration = `${slash(importDeclaration)}`
+  let expected = 'src/path/to/module'
+  expected = slash(expected)
 
   const transformedCode = babel.transform("import Module from '#/path/to/module'", {
     plugins: [
@@ -58,5 +60,5 @@ test('Should accept both config options', t => {
     ]
   })
 
-  t.ok(transformedCode.code.includes(importDeclaration))
+  t.ok(transformedCode.code.includes(expected))
 })
