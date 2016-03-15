@@ -22,9 +22,13 @@ export default (babel) => {
             : path.join(appRoot.path, state.file.opts.filename)
 
           const relativePath = path.relative(path.dirname(importer), importedFile)
-          const finalPath = (fallbackToAbsolute === true && appRoot.path !== process.cwd()) ? importedFile : relativePath
+          let finalPath = (fallbackToAbsolute === true && appRoot.path !== process.cwd()) ? importedFile : relativePath
 
-          babelPath.node.source.value = slash(path.normalize(finalPath))
+          finalPath = finalPath.includes('../') || path.isAbsolute(finalPath)
+            ? path.normalize(finalPath) 
+            : `./${path.normalize(finalPath)}`
+
+          babelPath.node.source.value = slash(finalPath)
         }
       }
     }

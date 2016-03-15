@@ -34,7 +34,9 @@ exports.default = function (babel) {
           var relativePath = _path2.default.relative(_path2.default.dirname(importer), importedFile);
           var finalPath = fallbackToAbsolute === true && _appRootPath2.default.path !== process.cwd() ? importedFile : relativePath;
 
-          babelPath.node.source.value = (0, _slash2.default)(_path2.default.normalize(finalPath));
+          finalPath = finalPath.includes('../') || _path2.default.isAbsolute(finalPath) ? _path2.default.normalize(finalPath) : './' + _path2.default.normalize(finalPath);
+
+          babelPath.node.source.value = (0, _slash2.default)(finalPath);
         }
       }
     }
