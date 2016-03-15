@@ -4,10 +4,10 @@ Babel plugin to solve the `../../../` problem.
 
 ## Example
 ```js
-//after
+//before
 import Module from '../../../path/to/module.js'
 
-//before
+//after
 import Module from '+/path/to/module.js'
 ```
 
