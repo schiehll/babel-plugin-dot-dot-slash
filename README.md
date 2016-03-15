@@ -1,6 +1,10 @@
-# babel-plugin-dot-dot-slash [![npm](https://badge.fury.io/js/babel-plugin-dot-dot-slash.svg)](http://badge.fury.io/js/babel-plugin-dot-dot-slash) [![Build Status](https://travis-ci.org/schiehll/babel-plugin-dot-dot-slash.svg?branch=master)](https://travis-ci.org/schiehll/babel-plugin-dot-dot-slash)
+# babel-plugin-dot-dot-slash 
 
-Babel plugin to solve the `../../../` problem.
+> Babel plugin to solve the `../../../` problem.
+
+[![travis build](https://img.shields.io/travis/schiehll/babel-plugin-dot-dot-slash.svg?style=flat-square)](https://travis-ci.org/schiehll/babel-plugin-dot-dot-slash)
+[![version](https://img.shields.io/npm/v/babel-plugin-dot-dot-slash.svg?style=flat-square)](http://npm.im/babel-plugin-dot-dot-slash)
+[![MIT License](https://img.shields.io/npm/l/babel-plugin-dot-dot-slash.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
 ## Example
 ```js
